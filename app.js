@@ -1,9 +1,15 @@
+const express = require('express');
+const app = express();
 const config = require('./config');
 const auth = require('basic-auth');
 const Raven = require('raven');
-const express = require('express');
-const app = express();
+const hbs = require('hbs');
 
+// handlebars templates
+app.set('view engine', 'html');
+app.engine('html', hbs.__express);
+
+// sentry setup
 Raven.config(config.sentry.nodeDsn, {
   environment: config.env,
   extra: {info: 'NodeJS Sentry test error'}
@@ -24,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Sentry node test');
+  res.render('index', {});
 });
 
 app.get('/error', (req, res) => {
