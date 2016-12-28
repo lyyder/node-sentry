@@ -34,18 +34,23 @@ app.use((req, res, next) => {
   }
 });
 
+// set req.user to add user info to sentry reports
+app.use(function(req, res, next) {
+  const names = ['john', 'jane', 'bob', 'alice'];
+  const name = names[Math.floor(Math.random() * names.length)];
+
+  req.user = {
+      email: `${name}@example.com`,
+      name: `Sentry test user`
+    };
+  next();
+});
+
 app.get('/', (req, res) => {
   res.render('index', {sentryDsn: config.sentry.jsDsn});
 });
 
 app.get('/error', (req, res) => {
-  const names = ['john', 'jane', 'bob', 'alice'];
-  const name = names[Math.floor(Math.random() * names.length)];
-
-  Raven.setUserContext({
-    email: `${name}@example.com`
-  });
-
   throw new Error();
 });
 
