@@ -1,0 +1,9 @@
+#error-btn {
+  padding: 10px;
+  background: #e74c3c;
+  display: inline-block;
+}
+
+#error-btn:active {
+  background: #c0392b;
+}
