@@ -39,6 +39,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/error', (req, res) => {
+  const names = ['john', 'jane', 'bob', 'alice'];
+  const name = names[Math.floor(Math.random() * names.length)];
+
+  Raven.setUserContext({
+    email: `${name}@example.com`
+  });
+
   throw new Error();
 });
 
