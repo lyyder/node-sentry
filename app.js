@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const config = require('./config');
+const error = require('./error');
 const auth = require('basic-auth');
 const Raven = require('raven');
 const hbs = require('hbs');
@@ -51,7 +52,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/error', (req, res) => {
-  throw new Error();
+  error.causeError();
 });
 
 app.use(Raven.errorHandler());
