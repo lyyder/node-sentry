@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
   };
 
   // Sentry reads user info form req.user
-  req.user = user
+  req.user = user;
 
   // Or then just put user info into Raven context
 
