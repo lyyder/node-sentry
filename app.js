@@ -7,12 +7,17 @@ const Raven = require('raven');
 const hbs = require('hbs');
 const serveStatic = require('serve-static');
 
-
 // sentry setup
 Raven.config(config.sentry.nodeDsn, {
   environment: config.env,
+  autoBreadcrumbs: {
+    'console': true,
+    'http': true,
+    'postgres': false,
+  },
   extra: {info: 'NodeJS Sentry test error'}
 }).install();
+
 app.use(Raven.requestHandler());
 
 // static files
@@ -35,15 +40,27 @@ app.use((req, res, next) => {
   }
 });
 
-// set req.user to add user info to sentry reports
+// Set user information for Sentry
 app.use(function(req, res, next) {
   const names = ['john', 'jane', 'bob', 'alice'];
   const name = names[Math.floor(Math.random() * names.length)];
+  const user = {
+    username: name,
+    email: `${name}@example.com`
+  };
 
-  req.user = {
-      email: `${name}@example.com`,
-      name: `Sentry test user`
-    };
+  // Sentry reads user info form req.user
+  req.user = user
+
+  // Or then just put user info into Raven context
+
+  // Raven.setContext({
+  //   user: {
+  //     username: name,
+  //     email: `${name}@example.com`
+  //   }
+  // });
+  //
   next();
 });
 
