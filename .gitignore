@@ -1,1 +1,9 @@
 node_modules
+/public/js/cljs/**
+figwheel_server.log
+/target/
+.lein-repl-history
+.lein-plugins/
+.repl
+.nrepl-port
+.cljs_rhino_repl
