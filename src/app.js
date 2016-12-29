@@ -21,7 +21,7 @@ Raven.config(config.sentry.nodeDsn, {
 app.use(Raven.requestHandler());
 
 // static files
-app.use(serveStatic(__dirname + '/public'));
+app.use(serveStatic(__dirname + '/../public'));
 
 // handlebars templates
 app.set('view engine', 'html');
