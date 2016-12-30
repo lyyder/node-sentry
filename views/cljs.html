@@ -1,0 +1,17 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/css/error.css">
+</head>
+<body>
+  <div class="error-btn" id="cljs-error-btn">
+    CLJS error
+  </div>
+<script>
+const CONFIG = {
+  sentryDsn: '{{sentryDsn}}'
+}
+</script>
+<script src="/lib/raven.min.js"></script>
+<script src="/js/compiled/sentrytest.js" type="text/javascript"></script>
+</body>
+</html>

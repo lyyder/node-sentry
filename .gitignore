@@ -1,5 +1,5 @@
 node_modules
-/public/js/cljs/**
+/public/js/compiled/**
 figwheel_server.log
 /target/
 .lein-repl-history

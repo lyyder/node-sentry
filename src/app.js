@@ -53,19 +53,17 @@ app.use(function(req, res, next) {
   req.user = user;
 
   // Or then just put user info into Raven context
+  // Raven.setContext(user);
 
-  // Raven.setContext({
-  //   user: {
-  //     username: name,
-  //     email: `${name}@example.com`
-  //   }
-  // });
-  //
   next();
 });
 
 app.get('/', (req, res) => {
   res.render('index', {sentryDsn: config.sentry.jsDsn});
+});
+
+app.get('/cljs', (req, res) => {
+  res.render('cljs', {sentryDsn: config.sentry.jsDsn});
 });
 
 app.get('/error', (req, res) => {
